@@ -1,22 +1,21 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
+import ThankYouModal from '@/components/ThankYouModal';
 
 const Index = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     amount: ''
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/thank-you');
+    setIsModalOpen(true);
   };
 
   return (
@@ -177,6 +176,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <ThankYouModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

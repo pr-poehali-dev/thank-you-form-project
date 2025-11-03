@@ -1,0 +1,401 @@
+═══════════════════════════════════════════════════════════════
+  КОД ДЛЯ ВСТРАИВАНИЯ МОДАЛЬНОГО ОКНА НА ВАШ САЙТ
+═══════════════════════════════════════════════════════════════
+
+📋 ИНСТРУКЦИЯ:
+
+1. Скопируйте весь код ниже
+2. Вставьте его перед закрывающим тегом </body> на вашей странице
+3. Вызовите функцию openModal() при отправке формы
+
+═══════════════════════════════════════════════════════════════
+
+<!-- НАЧАЛО КОДА ДЛЯ ВСТРАИВАНИЯ -->
+
+<style>
+    .thank-you-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        animation: tyModalFadeIn 0.3s ease;
+    }
+
+    .thank-you-modal-overlay.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+    }
+
+    .thank-you-modal-content {
+        background: white;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 100%;
+        padding: 48px 32px;
+        position: relative;
+        animation: tyModalSlideUp 0.3s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-modal-content {
+            padding: 32px 24px;
+        }
+    }
+
+    .thank-you-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #999;
+        padding: 8px;
+        line-height: 1;
+    }
+
+    .thank-you-close-btn:hover {
+        color: #333;
+    }
+
+    .thank-you-checkmark-container {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 32px;
+        background: linear-gradient(135deg, #0EA5E9, #0EA5E9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: tyModalScaleIn 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-checkmark-container {
+            width: 96px;
+            height: 96px;
+        }
+    }
+
+    .thank-you-checkmark {
+        width: 80px;
+        height: 80px;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-checkmark {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .thank-you-checkmark path {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+        animation: tyModalDrawCheck 0.5s ease forwards;
+        animation-delay: 0.3s;
+    }
+
+    .thank-you-modal-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: center;
+        margin-bottom: 16px;
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-modal-title {
+            font-size: 24px;
+        }
+    }
+
+    .thank-you-modal-subtitle {
+        font-size: 22px;
+        font-weight: 600;
+        color: #0EA5E9;
+        text-align: center;
+        margin-bottom: 24px;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-modal-subtitle {
+            font-size: 18px;
+        }
+    }
+
+    .thank-you-divider {
+        width: 96px;
+        height: 4px;
+        background: #0EA5E9;
+        border-radius: 2px;
+        margin: 0 auto 32px;
+    }
+
+    .thank-you-modal-text {
+        font-size: 16px;
+        color: #64748b;
+        text-align: center;
+        margin-bottom: 16px;
+        line-height: 1.6;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .thank-you-phone-link {
+        display: block;
+        font-size: 28px;
+        font-weight: 700;
+        color: #0EA5E9;
+        text-align: center;
+        text-decoration: none;
+        margin-bottom: 32px;
+        transition: color 0.2s;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-phone-link {
+            font-size: 24px;
+        }
+    }
+
+    .thank-you-phone-link:hover {
+        color: #0284c7;
+    }
+
+    .thank-you-timer-container {
+        background: linear-gradient(135deg, #0EA5E9, #0284c7);
+        border-radius: 16px;
+        padding: 24px 32px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-timer-container {
+            padding: 16px 24px;
+        }
+    }
+
+    .thank-you-timer-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .thank-you-timer-display {
+        font-size: 48px;
+        font-weight: 700;
+        color: white;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 4px;
+    }
+
+    @media (max-width: 640px) {
+        .thank-you-timer-display {
+            font-size: 36px;
+        }
+    }
+
+    .thank-you-second-message {
+        text-align: center;
+    }
+
+    @keyframes tyModalFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes tyModalSlideUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes tyModalScaleIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes tyModalDrawCheck {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+</style>
+
+<div id="thankYouModal" class="thank-you-modal-overlay">
+    <div class="thank-you-modal-content">
+        <button class="thank-you-close-btn" onclick="closeThankYouModal()">&times;</button>
+        
+        <div id="thankYouMainMessage">
+            <div class="thank-you-checkmark-container">
+                <svg class="thank-you-checkmark" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 25L20 35L40 15" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <h2 class="thank-you-modal-title">Уважаемый клиент!</h2>
+            <p class="thank-you-modal-subtitle">Ваша заявка на займ принята</p>
+            <div class="thank-you-divider"></div>
+
+            <p class="thank-you-modal-text">Наши специалисты свяжутся с вами с номера телефона</p>
+            <a href="tel:+74951178567" class="thank-you-phone-link">+7 (495) 117-85-67</a>
+
+            <div class="thank-you-timer-container">
+                <p class="thank-you-timer-label">Ожидаемое время звонка</p>
+                <div id="thankYouTimerDisplay" class="thank-you-timer-display">30:00</div>
+            </div>
+        </div>
+
+        <div id="thankYouSecondMessage" class="thank-you-second-message" style="display: none;">
+            <h2 class="thank-you-modal-title">Обработка заявки</h2>
+            <div class="thank-you-divider"></div>
+            <p class="thank-you-modal-text">Наши сотрудники свяжутся с вами, как обработают вашу заявку</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let thankYouTimerInterval;
+    let thankYouTimeLeft = 30 * 60;
+
+    function openThankYouModal() {
+        document.getElementById('thankYouModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        thankYouTimeLeft = 30 * 60;
+        document.getElementById('thankYouMainMessage').style.display = 'block';
+        document.getElementById('thankYouSecondMessage').style.display = 'none';
+        
+        startThankYouTimer();
+    }
+
+    function closeThankYouModal() {
+        document.getElementById('thankYouModal').classList.remove('active');
+        document.body.style.overflow = '';
+        
+        if (thankYouTimerInterval) {
+            clearInterval(thankYouTimerInterval);
+        }
+    }
+
+    function startThankYouTimer() {
+        if (thankYouTimerInterval) {
+            clearInterval(thankYouTimerInterval);
+        }
+
+        updateThankYouTimerDisplay();
+
+        thankYouTimerInterval = setInterval(() => {
+            thankYouTimeLeft--;
+            
+            if (thankYouTimeLeft <= 0) {
+                clearInterval(thankYouTimerInterval);
+                showThankYouSecondMessage();
+                return;
+            }
+            
+            updateThankYouTimerDisplay();
+        }, 1000);
+    }
+
+    function updateThankYouTimerDisplay() {
+        const minutes = Math.floor(thankYouTimeLeft / 60);
+        const seconds = thankYouTimeLeft % 60;
+        const display = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        document.getElementById('thankYouTimerDisplay').textContent = display;
+    }
+
+    function showThankYouSecondMessage() {
+        document.getElementById('thankYouMainMessage').style.display = 'none';
+        document.getElementById('thankYouSecondMessage').style.display = 'block';
+    }
+
+    document.getElementById('thankYouModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeThankYouModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeThankYouModal();
+        }
+    });
+</script>
+
+<!-- КОНЕЦ КОДА ДЛЯ ВСТРАИВАНИЯ -->
+
+═══════════════════════════════════════════════════════════════
+  ИСПОЛЬЗОВАНИЕ:
+═══════════════════════════════════════════════════════════════
+
+Чтобы открыть модальное окно, вызовите функцию:
+
+    openThankYouModal();
+
+Пример использования с формой:
+
+    <form onsubmit="event.preventDefault(); openThankYouModal();">
+        <input type="text" name="name" required>
+        <input type="tel" name="phone" required>
+        <button type="submit">Отправить заявку</button>
+    </form>
+
+═══════════════════════════════════════════════════════════════
+
+Или для обычной кнопки:
+
+    <button onclick="openThankYouModal()">Показать окно</button>
+
+═══════════════════════════════════════════════════════════════
+  ИНТЕГРАЦИЯ С TILDA:
+═══════════════════════════════════════════════════════════════
+
+1. Откройте настройки страницы в Tilda
+2. Перейдите в "Еще" → "HTML-код для сайта"
+3. Вставьте код в поле "Before </body>"
+4. В настройках формы добавьте следующий код в поле "Callback":
+   
+   openThankYouModal();
+
+5. Сохраните и опубликуйте страницу
+
+═══════════════════════════════════════════════════════════════
+  ОСОБЕННОСТИ:
+═══════════════════════════════════════════════════════════════
+
+✓ Адаптивный дизайн для мобильных и ПК
+✓ Анимированная синяя галочка
+✓ Таймер обратного отсчёта 30 минут
+✓ Автоматическая смена сообщения после таймера
+✓ Кликабельный номер телефона
+✓ Закрытие по ESC или клику вне окна
+✓ Блокировка прокрутки страницы при открытом окне
+
+═══════════════════════════════════════════════════════════════
