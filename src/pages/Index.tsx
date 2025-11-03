@@ -10,9 +10,8 @@ const Index = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
-    message: ''
+    amount: ''
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,7 +27,7 @@ const Index = () => {
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
               <Icon name="Building2" size={24} className="text-white" />
             </div>
-            <span className="text-2xl font-bold text-secondary">Компания</span>
+<span className="text-2xl font-bold text-secondary">МигКредит</span>
           </div>
           <nav className="hidden md:flex gap-8">
             <a href="#about" className="text-muted-foreground hover:text-secondary transition-colors">О нас</a>
@@ -43,29 +42,29 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-5xl md:text-6xl font-bold text-secondary leading-tight">
-                Профессиональные бизнес-решения
+                Займы до 100 000 ₽
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Мы предоставляем качественные услуги для развития вашего бизнеса. 
-                Индивидуальный подход к каждому клиенту и гарантия результата.
+                Быстрое одобрение и выдача займа. Минимум документов, 
+                решение за 15 минут.
               </p>
               <div className="flex flex-wrap gap-6 pt-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon name="Award" size={24} className="text-primary" />
+                    <Icon name="Clock" size={24} className="text-primary" />
                   </div>
                   <div>
-                    <div className="font-semibold text-secondary">15+ лет</div>
-                    <div className="text-sm text-muted-foreground">на рынке</div>
+                    <div className="font-semibold text-secondary">15 минут</div>
+                    <div className="text-sm text-muted-foreground">на решение</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon name="Users" size={24} className="text-primary" />
+                    <Icon name="Shield" size={24} className="text-primary" />
                   </div>
                   <div>
-                    <div className="font-semibold text-secondary">500+</div>
-                    <div className="text-sm text-muted-foreground">клиентов</div>
+                    <div className="font-semibold text-secondary">100%</div>
+                    <div className="text-sm text-muted-foreground">безопасно</div>
                   </div>
                 </div>
               </div>
@@ -73,7 +72,7 @@ const Index = () => {
 
             <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="bg-white rounded-2xl shadow-2xl p-8 border">
-                <h2 className="text-2xl font-bold text-secondary mb-6">Свяжитесь с нами</h2>
+                <h2 className="text-2xl font-bold text-secondary mb-6">Заявка на займ</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
                     <Label htmlFor="name">Ваше имя</Label>
@@ -82,18 +81,6 @@ const Index = () => {
                       placeholder="Иван Иванов"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="h-12"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="ivan@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
                       className="h-12"
                     />
@@ -111,19 +98,20 @@ const Index = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message">Сообщение</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Расскажите о вашем проекте..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    <Label htmlFor="amount">Сумма займа</Label>
+                    <Input
+                      id="amount"
+                      type="number"
+                      placeholder="50000"
+                      value={formData.amount}
+                      onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                       required
-                      className="min-h-32"
+                      className="h-12"
                     />
                   </div>
                   <Button type="submit" className="w-full h-12 text-base" size="lg">
-                    Отправить заявку
-                    <Icon name="Send" size={18} className="ml-2" />
+                    Получить займ
+                    <Icon name="ArrowRight" size={18} className="ml-2" />
                   </Button>
                 </form>
               </div>
@@ -134,12 +122,12 @@ const Index = () => {
 
       <section id="services" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center text-secondary mb-16">Наши услуги</h2>
+          <h2 className="text-4xl font-bold text-center text-secondary mb-16">Преимущества</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: 'Briefcase', title: 'Консалтинг', desc: 'Профессиональные консультации по развитию бизнеса' },
-              { icon: 'TrendingUp', title: 'Аналитика', desc: 'Глубокий анализ и стратегическое планирование' },
-              { icon: 'Shield', title: 'Безопасность', desc: 'Защита бизнес-процессов и данных компании' }
+              { icon: 'Zap', title: 'Быстро', desc: 'Решение по вашей заявке принимается за 15 минут' },
+              { icon: 'CheckCircle', title: 'Просто', desc: 'Минимум документов, всё онлайн без посещения офиса' },
+              { icon: 'Lock', title: 'Надёжно', desc: 'Ваши данные защищены, работаем по закону РФ' }
             ].map((service, i) => (
               <div 
                 key={i} 
@@ -165,9 +153,9 @@ const Index = () => {
                 <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
                   <Icon name="Building2" size={20} className="text-white" />
                 </div>
-                <span className="text-xl font-bold">Компания</span>
+                <span className="text-xl font-bold">МигКредит</span>
               </div>
-              <p className="text-white/70">Профессиональные решения для вашего бизнеса</p>
+              <p className="text-white/70">Быстрые займы для ваших целей</p>
             </div>
             <div>
               <h4 className="font-bold mb-4">Контакты</h4>
@@ -185,7 +173,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/70">
-            © 2024 Компания. Все права защищены.
+            © 2024 МигКредит. Все права защищены.
           </div>
         </div>
       </footer>
