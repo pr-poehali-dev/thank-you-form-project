@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виджет - Окно благодарности</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 20px; font-family: 'Open Sans', sans-serif;">
+
+    <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+        <h1 style="font-family: 'Montserrat', sans-serif; color: #1e293b; margin-bottom: 10px;">Код для встраивания на сайт</h1>
+        <p style="color: #64748b; margin-bottom: 30px;">Скопируйте код ниже и вставьте перед закрывающим тегом &lt;/body&gt; на вашей странице</p>
+        
+        <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong style="font-family: 'Montserrat', sans-serif; color: #1e293b;">Шаг 1: Скопируйте код</strong>
+                <button onclick="copyCode()" style="background: #0EA5E9; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">
+                    Копировать
+                </button>
+            </div>
+            <textarea id="widgetCode" readonly style="width: 100%; height: 400px; font-family: 'Courier New', monospace; font-size: 13px; padding: 15px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; resize: vertical;"><!-- НАЧАЛО КОДА ВИДЖЕТА -->
+<style>
+.thank-you-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;animation:tyFadeIn 0.3s ease}.thank-you-overlay.active{display:flex;justify-content:center;align-items:center;padding:16px}.thank-you-content{background:#fff;border-radius:16px;max-width:600px;width:100%;padding:32px 24px;position:relative;animation:tySlideUp 0.3s ease;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto}@media(min-width:640px){.thank-you-content{padding:48px 32px}}.thank-you-close{position:absolute;top:12px;right:12px;background:none;border:none;font-size:28px;cursor:pointer;color:#999;padding:8px;line-height:1;width:40px;height:40px;border-radius:50%;transition:all 0.2s}.thank-you-close:hover{color:#333;background:#f1f5f9}.thank-you-check{width:80px;height:80px;margin:0 auto 24px;background:linear-gradient(135deg,#0EA5E9,#0EA5E9);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:tyScaleIn 0.3s ease;box-shadow:0 10px 30px rgba(14,165,233,0.3)}@media(min-width:640px){.thank-you-check{width:100px;height:100px;margin-bottom:32px}}@media(min-width:768px){.thank-you-check{width:120px;height:120px}}.thank-you-check svg{width:48px;height:48px}@media(min-width:640px){.thank-you-check svg{width:60px;height:60px}}@media(min-width:768px){.thank-you-check svg{width:80px;height:80px}}.thank-you-check path{stroke-dasharray:100;stroke-dashoffset:100;animation:tyDrawCheck 0.5s ease forwards 0.3s}.thank-you-title{font-size:20px;font-weight:700;color:#1e293b;text-align:center;margin:0 0 12px;font-family:'Montserrat',sans-serif;padding:0 16px}@media(min-width:640px){.thank-you-title{font-size:24px;margin-bottom:16px}}@media(min-width:768px){.thank-you-title{font-size:28px}}.thank-you-subtitle{font-size:18px;font-weight:600;color:#0EA5E9;text-align:center;margin:0 0 20px;padding:0 16px}@media(min-width:640px){.thank-you-subtitle{font-size:20px;margin-bottom:24px}}@media(min-width:768px){.thank-you-subtitle{font-size:22px}}.thank-you-line{width:80px;height:4px;background:#0EA5E9;border-radius:2px;margin:0 auto 24px}@media(min-width:640px){.thank-you-line{width:96px;margin-bottom:32px}}.thank-you-text{font-size:14px;color:#64748b;text-align:center;margin:0 0 16px;line-height:1.6;padding:0 16px}@media(min-width:640px){.thank-you-text{font-size:16px;margin-bottom:20px}}@media(min-width:768px){.thank-you-text{font-size:16px}}.thank-you-phone{display:block;font-size:22px;font-weight:700;color:#0EA5E9;text-align:center;text-decoration:none;margin:0 0 24px;transition:color 0.2s;padding:8px 16px}@media(min-width:640px){.thank-you-phone{font-size:26px;margin-bottom:28px}}@media(min-width:768px){.thank-you-phone{font-size:28px;margin-bottom:32px}}.thank-you-phone:hover{color:#0284c7}.thank-you-timer{background:linear-gradient(135deg,#0EA5E9,#0284c7);border-radius:12px;padding:16px 20px;text-align:center;box-shadow:0 10px 30px rgba(14,165,233,0.3);margin:0 auto;max-width:280px}@media(min-width:640px){.thank-you-timer{border-radius:16px;padding:20px 24px;max-width:320px}}@media(min-width:768px){.thank-you-timer{padding:24px 32px}}.thank-you-timer-label{font-size:11px;color:rgba(255,255,255,0.9);margin:0 0 8px;text-transform:uppercase;letter-spacing:0.5px}@media(min-width:640px){.thank-you-timer-label{font-size:12px}}.thank-you-timer-display{font-size:32px;font-weight:700;color:#fff;font-family:'Courier New',monospace;letter-spacing:2px;margin:0}@media(min-width:640px){.thank-you-timer-display{font-size:40px;letter-spacing:3px}}@media(min-width:768px){.thank-you-timer-display{font-size:48px;letter-spacing:4px}}@keyframes tyFadeIn{from{opacity:0}to{opacity:1}}@keyframes tySlideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes tyScaleIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}@keyframes tyDrawCheck{to{stroke-dashoffset:0}}
+</style>
+
+<div id="thankYouWidget" class="thank-you-overlay">
+    <div class="thank-you-content">
+        <button class="thank-you-close" onclick="closeTYWidget()">&times;</button>
+        <div id="tyMainMsg">
+            <div class="thank-you-check">
+                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 25L20 35L40 15" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2 class="thank-you-title">Уважаемый клиент!</h2>
+            <p class="thank-you-subtitle">Ваша заявка на займ принята</p>
+            <div class="thank-you-line"></div>
+            <p class="thank-you-text">Наши специалисты свяжутся с вами с номера телефона</p>
+            <a href="tel:+74951178567" class="thank-you-phone">+7 (495) 117-85-67</a>
+            <div class="thank-you-timer">
+                <p class="thank-you-timer-label">Ожидаемое время звонка</p>
+                <div id="tyTimer" class="thank-you-timer-display">30:00</div>
+            </div>
+        </div>
+        <div id="tySecondMsg" style="display:none;text-align:center;padding:20px 0">
+            <h2 class="thank-you-title">Обработка заявки</h2>
+            <div class="thank-you-line"></div>
+            <p class="thank-you-text">Наши сотрудники свяжутся с вами, как обработают вашу заявку</p>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){var t,s=1800;function o(){document.getElementById("thankYouWidget").classList.add("active"),document.body.style.overflow="hidden",s=1800,document.getElementById("tyMainMsg").style.display="block",document.getElementById("tySecondMsg").style.display="none",e()}function i(){document.getElementById("thankYouWidget").classList.remove("active"),document.body.style.overflow="",t&&clearInterval(t)}function e(){t&&clearInterval(t),n(),t=setInterval(function(){if(--s<=0)return clearInterval(t),void function(){document.getElementById("tyMainMsg").style.display="none",document.getElementById("tySecondMsg").style.display="block"}();n()},1e3)}function n(){var t=Math.floor(s/60),e=s%60,o=String(t).padStart(2,"0")+":"+String(e).padStart(2,"0");document.getElementById("tyTimer").textContent=o}window.openTYWidget=o,window.closeTYWidget=i,document.getElementById("thankYouWidget").addEventListener("click",function(t){t.target===this&&i()}),document.addEventListener("keydown",function(t){"Escape"===t.key&&i()})})();
+</script>
+<!-- КОНЕЦ КОДА ВИДЖЕТА --></textarea>
+        </div>
+
+        <div style="background: #f0f9ff; border-left: 4px solid #0EA5E9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #0369a1; display: block; margin-bottom: 10px; font-family: 'Montserrat', sans-serif;">Шаг 2: Использование</strong>
+            <p style="color: #0c4a6e; margin: 0 0 15px; font-size: 14px;">Чтобы открыть окно, вызовите функцию:</p>
+            <code style="background: white; padding: 10px 15px; border-radius: 6px; display: block; font-family: 'Courier New', monospace; color: #0369a1; border: 1px solid #bae6fd;">openTYWidget();</code>
+        </div>
+
+        <div style="background: #fefce8; border-left: 4px solid #eab308; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #a16207; display: block; margin-bottom: 10px; font-family: 'Montserrat', sans-serif;">Пример для формы:</strong>
+            <pre style="background: white; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 13px; margin: 0; border: 1px solid #fde68a;"><code style="font-family: 'Courier New', monospace; color: #a16207;">&lt;form onsubmit="event.preventDefault(); openTYWidget();"&gt;
+    &lt;input type="text" name="name" required&gt;
+    &lt;input type="tel" name="phone" required&gt;
+    &lt;button type="submit"&gt;Отправить заявку&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+
+        <div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #15803d; display: block; margin-bottom: 10px; font-family: 'Montserrat', sans-serif;">Интеграция с Tilda:</strong>
+            <ol style="color: #166534; margin: 0; padding-left: 20px; font-size: 14px;">
+                <li style="margin-bottom: 8px;">Откройте настройки страницы в Tilda</li>
+                <li style="margin-bottom: 8px;">Перейдите в "Еще" → "HTML-код для сайта"</li>
+                <li style="margin-bottom: 8px;">Вставьте код в поле "Before &lt;/body&gt;"</li>
+                <li style="margin-bottom: 8px;">В настройках формы добавьте callback: <code style="background: white; padding: 2px 6px; border-radius: 4px;">openTYWidget();</code></li>
+                <li>Сохраните и опубликуйте</li>
+            </ol>
+        </div>
+
+        <div style="background: #faf5ff; border: 2px solid #a855f7; padding: 20px; border-radius: 8px;">
+            <strong style="color: #7e22ce; display: block; margin-bottom: 15px; font-size: 18px; font-family: 'Montserrat', sans-serif;">✨ Особенности виджета:</strong>
+            <ul style="color: #6b21a8; margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.8;">
+                <li>Полностью адаптивный дизайн для мобильных и ПК</li>
+                <li>Минимальный размер кода (сжат и оптимизирован)</li>
+                <li>Анимированная синяя галочка</li>
+                <li>Таймер обратного отсчёта 30 минут</li>
+                <li>Автоматическая смена сообщения</li>
+                <li>Кликабельный телефон</li>
+                <li>Закрытие по ESC или клику вне окна</li>
+                <li>Не конфликтует с другими скриптами</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="max-width: 800px; margin: 40px auto 20px; text-align: center; padding: 0 20px;">
+        <button onclick="openTYWidget()" style="background: linear-gradient(135deg, #0EA5E9, #0284c7); color: white; border: none; padding: 16px 40px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4); transition: all 0.3s; font-family: 'Montserrat', sans-serif;">
+            Открыть виджет (Демо)
+        </button>
+        <p style="color: #94a3b8; margin-top: 10px; font-size: 14px;">Нажмите, чтобы увидеть, как работает виджет</p>
+    </div>
+
+    <script>
+        function copyCode() {
+            const textarea = document.getElementById('widgetCode');
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Скопировано!';
+            btn.style.background = '#22c55e';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '#0EA5E9';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
