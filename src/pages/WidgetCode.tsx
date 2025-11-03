@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Copy, Check, ExternalLink } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const widgetCode = `<!-- НАЧАЛО КОДА ВИДЖЕТА -->
@@ -41,6 +41,29 @@ const widgetCode = `<!-- НАЧАЛО КОДА ВИДЖЕТА -->
 
 const WidgetCode = () => {
   const [copied, setCopied] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(1800);
+  const [showSecondMessage, setShowSecondMessage] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          setShowSecondMessage(true);
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(widgetCode);
@@ -50,13 +73,77 @@ const WidgetCode = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50">
-      <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 animate-fade-in">
+        <div className="bg-white rounded-2xl max-w-2xl w-full p-8 sm:p-12 relative animate-slide-up shadow-2xl max-h-[90vh] overflow-y-auto">
+          {!showSecondMessage ? (
+            <>
+              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 sm:mb-8 bg-gradient-to-br from-sky-400 to-sky-500 rounded-full flex items-center justify-center shadow-lg animate-scale-in">
+                <svg
+                  viewBox="0 0 50 50"
+                  fill="none"
+                  className="w-12 h-12 sm:w-16 sm:h-16"
+                >
+                  <path
+                    d="M10 25L20 35L40 15"
+                    stroke="white"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="animate-draw-check"
+                  />
+                </svg>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-3 sm:mb-4">
+                Уважаемый клиент!
+              </h2>
+              <p className="text-xl sm:text-2xl font-semibold text-sky-500 text-center mb-6">
+                Ваша заявка на займ принята
+              </p>
+
+              <div className="w-20 sm:w-24 h-1 bg-sky-500 rounded-full mx-auto mb-6 sm:mb-8"></div>
+
+              <p className="text-slate-600 text-center mb-4 text-base sm:text-lg">
+                Наши специалисты свяжутся с вами с номера телефона
+              </p>
+
+              <a
+                href="tel:+74951178567"
+                className="block text-2xl sm:text-3xl font-bold text-sky-500 hover:text-sky-600 transition-colors text-center mb-6 sm:mb-8"
+              >
+                +7 (495) 117-85-67
+              </a>
+
+              <div className="bg-gradient-to-r from-sky-500 to-sky-600 rounded-2xl p-6 sm:p-8 text-center shadow-xl max-w-sm mx-auto">
+                <p className="text-xs sm:text-sm text-white/90 mb-2 uppercase tracking-wide">
+                  Ожидаемое время звонка
+                </p>
+                <div className="text-4xl sm:text-5xl font-bold text-white font-mono tracking-wider">
+                  {formatTime(timeLeft)}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-8 animate-fade-in">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+                Обработка заявки
+              </h2>
+              <div className="w-20 sm:w-24 h-1 bg-sky-500 rounded-full mx-auto mb-6"></div>
+              <p className="text-slate-600 text-base sm:text-lg">
+                Наши сотрудники свяжутся с вами, как обработают вашу заявку
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8 relative z-10 opacity-50">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">
             Код для встраивания на сайт
           </h1>
           <p className="text-lg text-slate-600">
-            Скопируйте код ниже и вставьте перед закрывающим тегом &lt;/body&gt; на вашей странице
+            Скопируйте код ниже и вставьте перед закрывающим тегом &lt;/body&gt;
           </p>
         </div>
 
@@ -65,10 +152,7 @@ const WidgetCode = () => {
             <h2 className="text-xl font-semibold text-slate-900">
               Шаг 1: Скопируйте код
             </h2>
-            <Button
-              onClick={copyToClipboard}
-              className="flex items-center gap-2"
-            >
+            <Button onClick={copyToClipboard} className="flex items-center gap-2">
               {copied ? (
                 <>
                   <Check className="w-4 h-4" />
@@ -203,27 +287,40 @@ const WidgetCode = () => {
             </li>
           </ul>
         </div>
-
-        <div className="text-center mt-12">
-          <Button
-            onClick={() => {
-              if (typeof (window as any).openTYWidget === 'function') {
-                (window as any).openTYWidget();
-              } else {
-                alert('Виджет доступен только после установки кода на сайт');
-              }
-            }}
-            size="lg"
-            className="text-lg px-8 py-6"
-          >
-            <ExternalLink className="w-5 h-5 mr-2" />
-            Посмотреть демо виджета
-          </Button>
-          <p className="text-slate-500 mt-3 text-sm">
-            Нажмите, чтобы увидеть, как работает виджет
-          </p>
-        </div>
       </div>
+
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slide-up {
+          from { transform: translateY(30px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes scale-in {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes draw-check {
+          from { stroke-dashoffset: 100; }
+          to { stroke-dashoffset: 0; }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease;
+        }
+        .animate-slide-up {
+          animation: slide-up 0.3s ease;
+        }
+        .animate-scale-in {
+          animation: scale-in 0.3s ease;
+        }
+        .animate-draw-check {
+          stroke-dasharray: 100;
+          stroke-dashoffset: 100;
+          animation: draw-check 0.5s ease forwards 0.3s;
+        }
+      `}</style>
     </div>
   );
 };
