@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -28,10 +29,16 @@ const Index = () => {
             </div>
 <span className="text-2xl font-bold text-secondary">МигКредит</span>
           </div>
-          <nav className="hidden md:flex gap-8">
+          <nav className="hidden md:flex gap-6 items-center">
             <a href="#about" className="text-muted-foreground hover:text-secondary transition-colors">О нас</a>
             <a href="#services" className="text-muted-foreground hover:text-secondary transition-colors">Услуги</a>
             <a href="#contact" className="text-muted-foreground hover:text-secondary transition-colors">Контакты</a>
+            <Link to="/widget-code">
+              <Button variant="outline" size="sm" className="flex items-center gap-2">
+                <Icon name="Code2" size={16} />
+                Код для сайта
+              </Button>
+            </Link>
           </nav>
         </div>
       </header>
